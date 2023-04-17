@@ -10,5 +10,8 @@ COPY requirements.txt .
 # install dependencies
 RUN pip install -r requirements.txt
 
-# expose the port the app will run on
+# Make port 5000 available to the world outside this container
 EXPOSE 5000
+
+# Run app.py when the container launches
+CMD ["python", "app.py"]
