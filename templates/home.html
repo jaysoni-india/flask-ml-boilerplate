@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Flask ML by Jay Soni</title>
+    <meta name="discription" content="Flask ML by Jay Soni full, template can be used for other ML model">
+    <!-- MDB Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.11.0/mdb.min.css"
+          integrity="sha512-avbJ+2tqjGDsLhAbhnmNVjAfEI5Sa4+yrVSQD1K5sH8O5p7FwQlPsU+mxRVZ0zWPIk+FY9PyS23TCngfdb84Jw=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    <link rel="stylesheet" href="/static/css/main.css">
+    <link rel="apple-touch-icon" sizes="180x180" href="/static/icons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/static/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/static/icons/favicon-16x16.png">
+    <link rel="manifest" href="/static/icons/site.webmanifest">
+    <link rel="mask-icon" href="/static/icons/safari-pinned-tab.svg" color="#5bbad5">
+    <link rel="shortcut icon" href="/static/icons/favicon.ico">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="msapplication-config" content="/static/icons/browserconfig.xml">
+    <meta name="theme-color" content="#ffffff">
+    <!-- MS, fb & Whatsapp -->
+
+    <!-- MS Tile - for Microsoft apps-->
+    <meta name="msapplication-TileImage" content="/static/icons/android-chrome-512x512.png">
+
+    <!-- fb & Whatsapp -->
+
+    <!-- Site Name, Title, and Description to be displayed -->
+    <meta property="og:site_name" content="Flask ML by Jay Soni">
+    <meta property="og:title" content="Flask ML by Jay Soni in india">
+    <meta property="og:description" content="Flask ML by Jay Soni description">
+
+    <!-- Image to display -->
+    <!-- Replace   «example.com/image01.jpg» with your own -->
+    <meta property="og:image" content="/static/icons/android-chrome-512x512.png">
+
+    <!-- No need to change anything here -->
+    <meta property="og:type" content="website"/>
+    <meta property="og:image:type" content="image/jpeg">
+
+    <!-- Size of image. Any size up to 300. Anything above 300px will not work in WhatsApp -->
+    <meta property="og:image:width" content="300">
+    <meta property="og:image:height" content="300">
+
+    <!-- Website to visit when clicked in fb or WhatsApp-->
+    <meta property="og:url" content="https://jaysoni.dev">
+</head>
+
+<body>
+<div class="card">
+    <div class="card-body">
+        <h3 class="text-center mb-4">Flask ML by Jay Soni</h3>
+        <form method="POST" action="/">
+            {{ form.csrf_token }}
+            <label class="label" for="x1">X1</label>
+            <div class="form-outline mb-4">
+                <input type="text" id="x1" name="x1" class="form-control"
+                       {% if form.x1.data %}value="{{ form.x1.data }}"{% endif %}
+                       placeholder="X1 value" required>
+                {# for error in form.x1.errors
+                <div class="invalid-feedback">{{ error }}</div>
+             endfor #}
+            </div>
+            <label for="x2">X2</label>
+            <div class="form-outline mb-4">
+                <input type="text" id="x2" name="x2" class="form-control"
+                       {% if form.x2.data %}value="{{ form.x2.data }}"{% endif %}
+                       placeholder="X2 value" required>
+            </div>
+
+            <label for="x3">X3</label>
+            <div class="form-outline mb-4">
+                <input type="text" id="x3" name="x3" class="form-control"
+                       {% if form.x3.data %}value="{{ form.x3.data }}"{% endif %}
+                       placeholder="X3 value" required>
+            </div>
+
+            <button type="submit" id="predict" name="predict" class="btn float-right btn-primary btn-block mb-4">
+                Predict
+            </button>
+            <br>
+            <div class="text-right">
+                <button type="button" onClick="seedForm()" class="btn btn-secondary mb-4">Auto Seed Form</button>
+            </div>
+
+            {% if y_predicted %}
+                <div class="text-center">
+                    <p>Predicted Value is: <a href="#">{{ y_predicted }}</a></p>
+                    {% if y_predicted %}
+                        <p>Actual Value should be: <a href="#">{{ y_actual }}</a></p>
+                    {% endif %}
+                </div>
+            {% endif %}
+        </form>
+    </div>
+</div>
+<!-- MDB Bootstrap JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.11.0/mdb.min.js"
+        integrity="sha512-bDtT/ZL0G6mSwqqT1bxomLGC78lQC7Hqv/t4dM+98yRswcv182lHjIzfNYGYyhqGtduztecKlqIXFtZ5U/E8Hw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script>
+    function getRandomNumber(min = 10, max = 100) {
+        return Math.floor(Math.random() * (max - min + 1) + min);
+    }
+
+    function seedForm() {
+        ['x1', 'x2', 'x3'].forEach((id) => {
+            let inputField = document.getElementById(id);
+            inputField.value = getRandomNumber();
+        });
+        document.getElementById('predict').click();
+    }
+</script>
+</body>
+
+</html>
